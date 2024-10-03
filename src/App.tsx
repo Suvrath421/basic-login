@@ -33,6 +33,15 @@ const App: React.FC = () => {
     for (let i = 0; i < inputLength; i++) {
       const buttonPosition = generateRandomPosition();
       newButtons.push({ ...buttonPosition, isReal: i === randomIndex }); // Only one button is real
+
+      const buttonPosition1 = generateRandomPosition();
+      newButtons.push({ ...buttonPosition1, isReal: i === randomIndex }); // Only one button is real
+
+      const buttonPosition2 = generateRandomPosition();
+      newButtons.push({ ...buttonPosition2, isReal: i === randomIndex }); // Only one button is real
+
+      const buttonPosition3 = generateRandomPosition();
+      newButtons.push({ ...buttonPosition3, isReal: i === randomIndex }); // Only one button is real
     }
 
     setButtons(newButtons);
@@ -65,7 +74,10 @@ const App: React.FC = () => {
     // When the floating image is clicked, hide the image and bring back the buttons
     setShowFloatingImage(false);
     setFailedAttempts(0); // Reset failed attempts
-    generateButtons(name.length || password.length); // Re-generate buttons
+    setTimeout(() => {
+      // Ensure buttons are generated again after the image is hidden
+      generateButtons(name.length || password.length);
+    }, 100); // Allow state to update before regenerating buttons
   };
 
   useEffect(() => {
@@ -73,7 +85,7 @@ const App: React.FC = () => {
     if (showFloatingImage) {
       interval = setInterval(() => {
         setImagePosition(generateRandomPosition());
-      }, 500); // Move the image every 200ms
+      }, 200); // Move the image every 200ms
     }
     return () => {
       if (interval) {
@@ -122,7 +134,7 @@ const App: React.FC = () => {
                     position: 'absolute',
                     top: button.top,
                     left: button.left,
-                    backgroundColor: 'gray', // Make all buttons look the same
+                    backgroundColor: 'pink', // Make all buttons look the same
                   }}
                 >
                   Button {index + 1}
